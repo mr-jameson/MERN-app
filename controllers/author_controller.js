@@ -27,9 +27,34 @@ async function show (req, res) {
   res.render('author/show', { author }) // render the 'author/show' and pass it the {author}
 }
 
+// Logic to show the form for the edit page
+async function edit (req, res) {
+  let { id } = req.params;
+  let author = await AuthorModel.findById(id);
+  res.render('author/edit', { author });
+}
+
+// Logic to update the resource
+async function update (req, res) {
+  let { name, bio, gender } = req.body;
+  let { id } = req.params;
+  await AuthorModel.findByIdandUpdate(id, {name, bio, gender});
+  res.redirect(`author/${id}`);
+}
+
+// Logic to destroy resource
+async function destroy (req, res) {
+  let { id } = req.params;
+  await AuthorModel.findByIdAndRemove(id);
+  res.redirect("/authors");
+}
+
 module.exports = {
-  create,
+  create, 
   index,
   make,
-  show
+  show,
+  update,
+  edit,
+  destroy
 }

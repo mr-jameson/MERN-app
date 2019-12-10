@@ -14,6 +14,16 @@ router.get('/authors/new', AuthorController.make)
 // Show is the name chosen because of rails naming convention. We could choose anything
 // The ":" indicates there is a variable or wild card coming into the route
 // What we put after the ":" will be made avalible under params in the controller
-router.get('/authors/:id', AuthorController.show)
+router.get('/authors/:id', AuthorController.show);
+
+// Show edit page
+router.get('/authors/:id/edit', AuthorController.edit);
+
+// Update page
+router.patch('/authors/:id', AuthorController.update);
+router.put('/authors/:id', AuthorController.update);
+
+// Delete route
+router.delete('/authors/:id', AuthorController.destroy)
 
 module.exports = router
